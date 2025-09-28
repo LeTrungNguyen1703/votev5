@@ -1,3 +1,4 @@
+import { PrismaClient } from "@prisma/client";
 import { SQLDatabase } from "encore.dev/storage/sqldb";
 
 // Define a database named 'encore_prisma_test', using the database migrations
@@ -7,5 +8,13 @@ export const DB = new SQLDatabase('votev5', {
   migrations: {
     path: './prisma/migrations',
     source: 'prisma',
+  },
+});
+
+export const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: DB.connectionString,
+    },
   },
 });
